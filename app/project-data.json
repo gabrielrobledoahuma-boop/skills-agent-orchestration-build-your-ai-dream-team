@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "name": "Onboarding Refresh",
+      "owner": "Mona",
+      "status": "Active",
+      "recentActivity": "Contributor checklist updated after accessibility review",
+      "priority": "High"
+    },
+    {
+      "name": "API Reliability Sweep",
+      "owner": "Ravi",
+      "status": "Monitoring",
+      "recentActivity": "Retry metrics reviewed and timeout thresholds tuned",
+      "priority": "Medium"
+    },
+    {
+      "name": "Docs Signal Cleanup",
+      "owner": "Iris",
+      "status": "In review",
+      "recentActivity": "Pull request opened for clearer quickstart sections",
+      "priority": "Medium"
+    },
+    {
+      "name": "Release Readiness Board",
+      "owner": "Theo",
+      "status": "Blocked",
+      "recentActivity": "Waiting on final dependency inventory from platform team",
+      "priority": "High"
+    }
+  ]
+}

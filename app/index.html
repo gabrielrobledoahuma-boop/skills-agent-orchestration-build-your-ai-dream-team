@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Pulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="dashboard" aria-labelledby="dashboard-title">
+    <header class="dashboard-header">
+      <p class="eyebrow">Contributor dashboard</p>
+      <h1 id="dashboard-title">Project Pulse</h1>
+      <p class="dashboard-summary">A quick read on active projects, owners, current status, recent activity, and priority.</p>
+    </header>
+
+    <section class="project-grid" id="project-list" aria-label="Project cards"></section>
+  </main>
+
+  <script>
+    const projectList = document.querySelector("#project-list");
+
+    function createProjectCard(project) {
+      const card = document.createElement("article");
+      card.className = "project-card";
+
+      card.innerHTML = `
+        <div class="project-card__header">
+          <h2>${project.name}</h2>
+          <span class="project-card__status">${project.status}</span>
+        </div>
+        <dl class="project-card__details">
+          <div>
+            <dt>Owner</dt>
+            <dd>${project.owner}</dd>
+          </div>
+          <div>
+            <dt>Recent activity</dt>
+            <dd>${project.recentActivity}</dd>
+          </div>
+          <div>
+            <dt>Priority</dt>
+            <dd>${project.priority}</dd>
+          </div>
+        </dl>
+      `;
+
+      return card;
+    }
+
+    async function renderProjects() {
+      try {
+        const response = await fetch("project-data.json");
+
+        if (!response.ok) {
+          throw new Error(`Unable to load project-data.json: ${response.status}`);
+        }
+
+        const data = await response.json();
+        projectList.replaceChildren(...data.projects.map(createProjectCard));
+      } catch (error) {
+        projectList.innerHTML = `<p class="dashboard-error">Project data could not be loaded.</p>`;
+        console.error(error);
+      }
+    }
+
+    renderProjects();
+  </script>
+</body>
+</html>
